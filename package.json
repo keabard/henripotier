@@ -1,0 +1,28 @@
+{
+  "name": "henripotier-library",
+  "version": "0.0.1",
+  "description": "Henri Potier Library",
+  "main": "index.js",
+  "dependencies": {
+    "bluebird": "~2.9.9",
+    "body-parser": "~1.9.3",
+    "coffee-script": "~1.9.1",
+    "connect-flash": "~0.1.1",
+    "ect": "*",
+    "express": "~4.10.4",
+    "express-session": "~1.9.2",
+    "express-validator": "^2.8.0",
+    "glob": "~4.3.1",
+    "lodash": "~3.2.0",
+    "mocha": "^2.2.4",
+    "prettyjson": "1.1.2",
+    "request": "~2.49.0",
+    "serve-favicon": "~2.2.0",
+    "should": "^6.0.1",
+    "supertest": "^0.15.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "./node_modules/.bin/mocha"
+  }
+}
