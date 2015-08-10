@@ -1,0 +1,7 @@
+<% for item in @cart.items : %>
+	<img src="<%- item.cover %>" />
+	<%- item.title %>
+	<%- item.price %>
+<% end %>
+
+<%- cart.total %>
