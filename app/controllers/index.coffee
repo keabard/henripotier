@@ -1,5 +1,5 @@
-express = 	require 'express'
-router 	= 	express.Router()
+express 	= require 'express'
+router 		= express.Router()
 
 router.use '/', require('./shop')
 router.use '/cart', require('./cart')

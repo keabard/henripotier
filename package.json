@@ -7,7 +7,6 @@
     "bluebird": "~2.9.9",
     "body-parser": "~1.9.3",
     "coffee-script": "~1.9.1",
-    "connect-flash": "~0.1.1",
     "ect": "*",
     "express": "~4.10.4",
     "express-session": "~1.9.2",
