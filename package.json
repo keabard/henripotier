@@ -6,6 +6,7 @@
   "dependencies": {
     "bluebird": "~2.9.9",
     "body-parser": "~1.9.3",
+    "bower": "~1.4.1",
     "coffee-script": "~1.9.1",
     "ect": "*",
     "express": "~4.10.4",
@@ -14,7 +15,7 @@
     "glob": "~4.3.1",
     "lodash": "~3.2.0",
     "mocha": "^2.2.4",
-    "prettyjson": "1.1.2",
+    "node-cache": "^3.0.0",
     "request": "~2.49.0",
     "serve-favicon": "~2.2.0",
     "should": "^6.0.1",
