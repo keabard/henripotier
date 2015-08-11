@@ -1,15 +1,14 @@
-express     = require 'express'
-Promise     = require 'bluebird'
-request     = Promise.promisify require('request')
-router      = express.Router()
+express         = require 'express'
+Promise         = require 'bluebird'
+request         = Promise.promisify require('request')
+router          = express.Router()
+
+LibraryManager  = require '../libs/library_manager'
 
 router.get '/', (req, res) ->
-    request
-        uri: 'http://henri-potier.xebia.fr/books'
-        method: 'GET'
-        json: true
-    .spread (response, body) ->
+    LibraryManager.getBooks()
+    .then (books) ->
         return res.render 'shop/shop',
-            books: body 
+            books: books 
 
 module.exports = router

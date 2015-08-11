@@ -1,24 +1,33 @@
-express     = require 'express'
-Promise     = require 'bluebird'
-request     = Promise.promisify require('request')
-router      = express.Router()
+express         = require 'express'
+Promise         = require 'bluebird'
+request         = Promise.promisify require('request')
+router          = express.Router()
 
-router.post '/checkout', (req, res) ->
-    # Handle items argument
-    if not req.param('items')?
-        return res.redirect '/'
-    else if req.param('items').length is 0
-        return res.redirect '/'
+LibraryManager  = require '../libs/library_manager'
 
-    # Build API request url, and get best commercial offer from API response
-    items_string = req.param('items').join ','
-    request
-        uri: "http://henri-potier.xebia.fr/books/#{items_string}/commercialOffers"
-        method: 'GET'
-        json: true
-    .spread (response, body) ->
-        for offer in body.offers
+router.get '/checkout', (req, res) ->
+    # Get cart content
+    LibraryManager.getCart()
+    # Get best commercial offer
+    .then (cart) ->
+        if not cart?
+            return res.render 'cart/cart'
+        return LibraryManager.getBestCommercialOffer cart
+    .then (best_offer) ->
+        return res.render 'cart/cart',
+            cart: cart
+            best_offer: best_offer
+    .catch (error) ->
+        return res.json error
 
-        return res.json 'OK'
+router.post '/add_item', (req, res) ->
+    # Handle item (correct price, isbn, cover, etc...)
+
+    # Add item to cart
+    LibraryManager.addItemToCart req.param('item')
+    .then (cart) ->
+        return res.json cart
+    .catch (error) ->
+        return res.json error
 
 module.exports = router
