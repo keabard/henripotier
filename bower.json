@@ -6,8 +6,8 @@
     "Keabard <gouki46@hotmail.com>"
   ],
   "main": [
-    "js/app.js",
-    "css/app.css"
+    "webapp/bin/app.js",
+    "public/css/app.css"
   ],
   "license": "MIT",
   "ignore": [
@@ -18,6 +18,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular-bootstrap": "~0.13.3"
+    "angular": "~1.4.4",
+    "angular-bootstrap": "~0.13.3",
+    "angular-route": "~1.4.0"
   }
 }
