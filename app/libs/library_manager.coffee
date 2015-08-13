@@ -3,6 +3,7 @@ NodeCache       = require 'node-cache'
 Promise         = require 'bluebird'
 request         = Promise.promisify require('request')
 
+errors          = './errors'
 XebiaApiClient  = require './xebia_api_client'
 
 class LibraryManager
@@ -23,19 +24,39 @@ class LibraryManager
 
     ###*
     * Adds an item to the cart
+    * @parameter {Object} item
     * @return {Promise} cart
     *###
     addItemToCart: (item) ->
         @cache.get 'cart'
-        .then (value) ->
-            if not value?
+        .then (cart) =>
+            if not cart?
                 cart =
                     items: [item]
                     total_price: item.price
             else
                 cart.items.push item
                 cart.total_price += item.price
-            return @cache.set 'cart', cart, 600
+            @cache.set 'cart', cart, 60
+            .return cart
+
+    ###*
+    * Removes an item from the cart
+    * @parameter {Object} item
+    * @return {Promise} cart
+    *###
+    removeItemFromCart: (item) ->
+        @cache.get 'cart'
+        .then (cart) =>
+            if not cart?
+                throw new errors.CacheError 'No cart in cache while attempting to remove an item'
+            else
+                for index, cart_item of cart.items
+                    if cart_item.isbn is item.isbn
+                        cart.items.splice index, 1
+                cart.total_price -= item.price
+            @cache.set 'cart', cart, 60
+            .return cart
 
     ###*
     * Gets books list, caches it if necessary, and returns it
@@ -65,7 +86,7 @@ class LibraryManager
                 offer_price = null
                 switch offer.type
                     when 'percentage'
-                        offer_price = Math.round(cart.total_price * offer.value / 100.0)
+                        offer_price = cart.total_price - Math.round(cart.total_price * offer.value / 100.0)
                     when 'minus'
                         offer_price = cart.total_price - offer.value
                     when 'slice'
@@ -73,6 +94,7 @@ class LibraryManager
                         offer_price = cart.total_price - number_of_slice * offer.value
                 if offer_price < best_offer_price
                     best_offer = offer
+                    best_offer_price = offer_price
             return best_offer 
 
 module.exports = new LibraryManager()

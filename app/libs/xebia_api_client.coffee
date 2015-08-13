@@ -39,6 +39,6 @@ class XebiaApiClient
         .catch SyntaxError, (e) ->
             throw new errors.APIError 'Response is not a JSON'
         .then (body) ->
-            return body
+            return body.offers
 
 module.exports = new XebiaApiClient()

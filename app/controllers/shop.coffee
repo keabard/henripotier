@@ -6,10 +6,7 @@ router          = express.Router()
 LibraryManager  = require '../libs/library_manager'
 
 router.get '/', (req, res) ->
-    LibraryManager.getBooks()
-    .then (books) ->
-        return res.render 'shop/shop',
-            books: books
+    return res.render 'shop/shop'
 
 router.get '/books', (req, res) ->
     LibraryManager.getBooks()
