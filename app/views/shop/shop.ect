@@ -1,9 +1,5 @@
 <% extend 'layout.ect' %>
 
-<% for book in @books : %>
-    <div class="book">
-        <img src="<%- book.cover %>" />
-        <%- book.title %>
-        <%- book.price %>
-    </div>
-<% end %>
+<div ng-controller="ShopCtrl">
+    <ng-view></ng-view>
+</div>
