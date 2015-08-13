@@ -13,7 +13,7 @@ app.set 'views', "#{__dirname}/views"
 app.set 'view engine', 'ect'
 app.engine 'ect', ectRenderer.render
 # app.use favicon "#{__dirname}/../public/favicon.ico"
-app.use bodyParser.urlencoded({extended: true})
+app.use bodyParser.json()
 app.use express.static "#{__dirname}/../public"
 app.use '/js', express.static "#{__dirname}/../webapp/bin"
 app.use '/js/lib', express.static "#{__dirname}/../bower_components"
