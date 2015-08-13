@@ -1,8 +1,16 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
 body {
     font-family: Helvetica;
     font-size: 12px;
-    padding: 0;
-    margin: 0;
 }
 
 header {
@@ -42,9 +50,28 @@ header div.header_menu {
     color: white;
 }
 
-header div.header_menu div.cart {
+header div.header_menu a.cart {
     font-size: 30px;
     cursor: pointer;
+    position: relative;
+    font-color: white;
+}
+
+header div.header_menu a.cart:visited {
+    color:white;
+}
+
+.notification_bubble {
+    position:absolute;
+    top: -5px;
+    right:-6px;
+    padding:1px 2px 1px 2px;
+    background-color:red;
+    color:white;
+    font-weight:bold;
+    font-size:0.45em;
+    border-radius:30px;
+    box-shadow:1px 1px 1px gray;
 }
 
 div.content {
@@ -80,6 +107,10 @@ div.content {
 
 .book:hover:after {
     opacity: 1;
+}
+
+.book.in_cart:after {
+    content: "\f00d";
 }
 
 .book img {

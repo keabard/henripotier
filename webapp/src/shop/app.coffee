@@ -1,7 +1,7 @@
 'use strict'
 
 angular
-    .module('shop', ['ngRoute', 'shop.controllers'])
+    .module('shop', ['shop.controllers'])
     .config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
             $routeProvider.when '/',
                 templateUrl: '/partials/shop/books-list.html',
@@ -9,6 +9,4 @@ angular
 
             $routeProvider.otherwise
                 redirectTo: '/'
-
-            $locationProvider.html5Mode true
     ])

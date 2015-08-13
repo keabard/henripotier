@@ -1,6 +1,6 @@
 <div id="books">
-	<div ng-repeat="book in books" class="book">
-		<img src="{{ book.cover }}" /><br />
+	<div ng-repeat="book in books" class="book" ng-class="{in_cart: isBookInCart(book)}" ng-click="isBookInCart(book) && removeBookFromCart(book) || addBookToCart(book)">
+		<img ng-src="{{book.cover}}" /><br />
 		<span class="description">{{ book.title }}</span><br />
 		<span class="price">{{ book.price }} €</span>
 	</div>
