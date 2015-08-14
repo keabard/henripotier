@@ -4,17 +4,11 @@ BooksListCtrl = ($scope, $http, cartService) ->
     $http.get '/books'
     .then (response) ->
         $scope.books = response.data
-    , (error) ->
-        console.log 'Error'
+    , (response) ->
+    	console.error 'Error while gettings books : ' + response.data.message
 
    	$scope.addBookToCart = (book) ->
         return cartService.addItemToCart book
-
-    $scope.removeBookFromCart = (book) ->
-        return cartService.removeItemFromCart book
-
-    $scope.isBookInCart = (book) ->
-        return cartService.isItemInCart book
 
 angular
     .module('shop.controllers', [])

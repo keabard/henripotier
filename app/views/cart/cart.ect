@@ -1,17 +1,5 @@
 <% extend 'layout.ect' %>
 
-<% if not @cart? : %>
-    <div class="warning">Your cart is empty !</div>
-<% else : %>
-    <ul>
-        <% for cart_item in @cart.items : %>
-            <li class="item">
-                <img src="<%- cart_item.cover %>" />
-                <span class="description"><%- cart_item.description %></span>
-                <span class="price"><%- cart_item.price %></span>
-            </li>
-        <% end %>
-        <li class="total"><%- @cart.total_price %></li>
-        <li class="offer"><%- @best_offer %></li>
-    </ul>
-<% end %>
+<div ng-controller="CartCtrl">
+    <ng-view></ng-view>
+</div>

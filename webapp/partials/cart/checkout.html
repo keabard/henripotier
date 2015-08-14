@@ -1,0 +1,44 @@
+<div ng-if="!cartService.cart || !cartService.cart.items.length > 0" class="empty_cart">Your cart is empty !</div>
+<div id="cart" ng-if="cartService.cart.items.length > 0">
+    <h2>Votre panier :</h2>
+    <br />
+    <div class="item noselect" ng-repeat="item in cartService.cart.items">
+        <div class="description">
+            <img ng-src="{{item.cover}}" />
+            <span>{{item.title}}</span>
+        </div>
+        <span class="price">
+            {{item.price}} €
+        </span>
+        <span class="remove_item" ng-click="cartService.removeItemFromCart(item)">
+            <i class="fa fa-remove"></i>
+        </span>
+    </div>
+    <br />
+    <hr />
+    <div class="total">
+        <h2>Prix total :</h2>
+        <span>{{cartService.cart.total_price}} €</span>
+    </div>
+    <div ng-if="best_offer">
+        <div class="offer" ng-switch="best_offer.type">
+            <h2 ng-switch-when="percentage">
+                Bénéficiez de {{best_offer.value}}% de réduction sur votre commande !
+            </h2>
+            <h2 ng-switch-when="minus">
+                Bénéficiez d'une réduction immédiate de {{best_offer.value}} € sur votre commande !
+            </h2>
+            <h2 ng-switch-when="slice">
+                Tous les {{best_offer.sliceValue}} € d'achat, bénéficiez de {{best_offer.value}} € de réduction sur votre commande !
+            </h2> 
+            <br />
+            <div class="final_price">
+                <h2>Prix total après réduction :</h2>
+                <span>{{best_offer.final_price}} €</span>
+            </div>
+        </div>
+    </div>
+    <div class="buy">
+        Acheter
+    </div>
+</div>

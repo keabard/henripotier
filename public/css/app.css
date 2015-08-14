@@ -3,9 +3,22 @@
     margin: 0;
 }
 
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 a {
     text-decoration: none;
     color: white;
+}
+
+ul {
+    list-style-type: none;
 }
 
 body {
@@ -61,6 +74,10 @@ header div.header_menu a.cart:visited {
     color:white;
 }
 
+footer {
+    height:100px;
+}
+
 .notification_bubble {
     position:absolute;
     top: -5px;
@@ -75,18 +92,20 @@ header div.header_menu a.cart:visited {
 }
 
 div.content {
-    width: 960px;
+    max-width: 960px;
     margin: 20px auto;
+    padding: 0px 20px;
 }
 
 .book {
     display: inline-block;
-    padding: 10px;
+    padding-top: 10px;
     margin: 5px;
     border: 1px solid grey;
     cursor: pointer;
     position: relative;
-    height: 350px;
+    width:280px;
+    text-align: center;
 }
 
 .book:after {
@@ -97,7 +116,7 @@ div.content {
     top:0; left:0;
     background:rgba(0,0,0,0.6);
     text-align: center;
-    line-height: 370px;
+    line-height: 450px;
     font-size: 40px;
     color: white;
     opacity: 0;
@@ -109,22 +128,111 @@ div.content {
     opacity: 1;
 }
 
-.book.in_cart:after {
-    content: "\f00d";
-}
-
 .book img {
-    height:300px;
+    width:260px;
 }
 
 .book .description {
     text-align: center;
     display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
 .book .price {
     text-align: center;
     display: block;
-    background-color: blue;
+    background-color: #2B2BC3;
     color: white;
+    font-size:16px;
+    font-weight:600;
+    padding: 5px;
+}
+
+div.empty_cart {
+    text-align:center;
+    width:100%;
+    font-style: italic;
+    font-size:20px;
+}
+
+div.item {
+    position:relative;
+}
+
+div.item:nth-child(even) {
+    background: #E8E8E8;
+}
+
+div.item img {
+    height:150px;
+}
+
+div.total, div.item, div.final_price {
+    text-align: justify;
+    font-size: 0px;
+    padding: 10px;    
+}
+
+div.total:after, div.item:after, div.final_price:after {
+    content: '';
+    display: inline-block;
+    width: 100%;
+}
+
+div.total h2, div.item .description, div.final_price h2 {
+    display:inline-block;
+    font-size: 16px;
+    vertical-align: middle;
+}
+
+div.item .description span, div.item .description img, div.final_price span{
+    vertical-align: middle;
+    display:inline-block;
+}
+
+div.total span, div.item .price {
+    display:inline-block;
+    font-size:18px;
+    font-weight:600;
+    vertical-align: middle;
+}
+
+div.item .remove_item {
+    position:absolute;
+    font-size:20px;
+    cursor:pointer;
+    right: 5px;
+    top: 5px;
+}
+
+div.buy {
+    color:red;
+    float:right;
+    width:100px;
+    color:white;
+    background-color: black;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius:10px;
+    text-align:center;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+div.offer {
+    background-color:#dff0d8; 
+    color:#3c763d;
+    padding: 20px 0px 20px 20px;
+}
+
+div.offer h2 {
+    text-align: center;
+}
+
+div.final_price span {
+    font-size: 18px;
+    font-weight:600;
 }

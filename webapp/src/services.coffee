@@ -12,16 +12,20 @@ angular
                 $http.post '/cart/add_item', item
                 .then (response) =>
                     @cart = response.data
-                , (error) =>
-                    console.log 'Add item to cart error'
+                , (response) ->
+                    console.error 'Error while adding an item to the cart : ' + response.data.message
 
             removeItemFromCart: (item) ->
                 $http.post '/cart/remove_item', item
                 .then (response) =>
                     @cart = response.data
-                , (error) =>
-                    console.log 'Remove item to cart error'
+                , (response) ->
+                    console.error 'Error while removing an item from the cart : ' + response.data.message
 
-            isItemInCart: (item) ->
-                return @cart?.items?.filter((cart_item) -> cart_item.isbn is item.isbn).length > 0
-    ]
+            getCart: () ->
+                $http.get '/cart/get'
+                .then (response) =>
+                    @cart = response.data
+                , (response) ->
+                    console.error 'Error while getting the cart : ' + response.data.message
+    ]               
