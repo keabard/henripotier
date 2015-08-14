@@ -21,6 +21,8 @@ class LibraryManager
         @cache.get 'cart'
         .then (value) ->
             return value
+        .catch (error) ->
+            throw error
 
     ###*
     * Adds an item to the cart
@@ -37,8 +39,10 @@ class LibraryManager
             else
                 cart.items.push item
                 cart.total_price += item.price
-            @cache.set 'cart', cart, 60
+            @cache.set 'cart', cart, 600
             .return cart
+        .catch (error) ->
+            throw error
 
     ###*
     * Removes an item from the cart
@@ -54,9 +58,12 @@ class LibraryManager
                 for index, cart_item of cart.items
                     if cart_item.isbn is item.isbn
                         cart.items.splice index, 1
+                        break
                 cart.total_price -= item.price
-            @cache.set 'cart', cart, 60
+            @cache.set 'cart', cart, 600
             .return cart
+        .catch (error) ->
+            throw error
 
     ###*
     * Gets books list, caches it if necessary, and returns it
@@ -71,6 +78,8 @@ class LibraryManager
                         @cache.set 'books', books, 1
                         .return books
             return value
+        .catch (error) ->
+            throw error
 
     ###*
     * Returns best commercial offer for a given list of books
@@ -81,7 +90,8 @@ class LibraryManager
         # Get available offers for this cart
         XebiaApiClient.getCommercialOffers cart.items 
         .then (offers) ->
-            best_offer_price = cart.total_price
+            best_offer = 
+                final_price: cart.total_price
             for offer in offers
                 offer_price = null
                 switch offer.type
@@ -92,9 +102,11 @@ class LibraryManager
                     when 'slice'
                         number_of_slice = parseInt cart.total_price / offer.sliceValue
                         offer_price = cart.total_price - number_of_slice * offer.value
-                if offer_price < best_offer_price
+                if offer_price < best_offer.final_price
                     best_offer = offer
-                    best_offer_price = offer_price
-            return best_offer 
+                    best_offer.final_price = offer_price
+            return best_offer
+        .catch (error) ->
+            throw error
 
 module.exports = new LibraryManager()

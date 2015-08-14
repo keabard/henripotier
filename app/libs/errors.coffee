@@ -6,10 +6,15 @@ class CacheError extends Error
     constructor: (@message) ->
         @name = 'CacheError'
 
-class CartError extends Error
-	constructor: (@message) ->
-        @name = 'CartError'
+class EmptyCartError extends Error
+    constructor: (@message) ->
+        @name = 'EmptyCartError'
+
+class GetCartError extends Error
+    constructor: (@message) ->
+        @name = 'GetCartError'
 
 module.exports.APIError = APIError
 module.exports.CacheError = CacheError
-module.exports.CartError = CartError
+module.exports.EmptyCartError = EmptyCartError
+module.exports.GetCartError = GetCartError

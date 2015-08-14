@@ -12,5 +12,7 @@ router.get '/books', (req, res) ->
     LibraryManager.getBooks()
     .then (books) ->
         return res.json books
+    .catch (error) ->
+        return res.status(500).json error
 
 module.exports = router
