@@ -3,7 +3,7 @@ NodeCache       = require 'node-cache'
 Promise         = require 'bluebird'
 request         = Promise.promisify require('request')
 
-errors          = './errors'
+errors          = require './errors'
 XebiaApiClient  = require './xebia_api_client'
 
 class LibraryManager
@@ -55,10 +55,14 @@ class LibraryManager
             if not cart?
                 throw new errors.CacheError 'No cart in cache while attempting to remove an item'
             else
+                item_removed = false
                 for index, cart_item of cart.items
                     if cart_item.isbn is item.isbn
                         cart.items.splice index, 1
+                        item_removed = true
                         break
+                if not item_removed
+                    throw new errors.CacheError 'Trying to remove an item that is not in the cart'
                 cart.total_price -= item.price
             @cache.set 'cart', cart, 600
             .return cart

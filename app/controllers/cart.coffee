@@ -63,6 +63,6 @@ router.post '/remove_item', (req, res) ->
     .then (cart) ->
         return res.json cart
     .catch (error) ->
-        return res.status(500).json error    
+        return res.status(500).json error
 
 module.exports = router

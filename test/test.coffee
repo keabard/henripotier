@@ -141,7 +141,7 @@ describe 'Express controllers', () ->
                 .expect 'Content-Type', /json/
                 .expect 200
                 .end (err, res) =>
-                    if err? 
+                    if err?
                         throw err
                     res.body.should.be.a.Object
                     res.body.should.have.properties ['items', 'total_price']
