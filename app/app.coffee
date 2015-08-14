@@ -1,5 +1,6 @@
 bodyParser       = require 'body-parser'
 express 		 = require 'express'
+expressValidator = require 'express-validator'
 ECT              = require 'ect'
 favicon          = require 'serve-favicon'
 
@@ -14,6 +15,7 @@ app.set 'view engine', 'ect'
 app.engine 'ect', ectRenderer.render
 # app.use favicon "#{__dirname}/../public/favicon.ico"
 app.use bodyParser.json()
+app.use expressValidator()
 app.use express.static "#{__dirname}/../public"
 app.use '/js', express.static "#{__dirname}/../webapp/bin"
 app.use '/js/lib', express.static "#{__dirname}/../bower_components"

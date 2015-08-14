@@ -10,7 +10,6 @@
     "coffee-script": "~1.9.1",
     "ect": "*",
     "express": "~4.10.4",
-    "express-session": "~1.9.2",
     "express-validator": "^2.8.0",
     "glob": "~4.3.1",
     "grunt": "^0.4.5",

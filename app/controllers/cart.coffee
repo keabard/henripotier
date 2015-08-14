@@ -33,6 +33,13 @@ router.get '/get', (req, res) ->
 
 router.post '/add_item', (req, res) ->
     # Handle item (correct price, isbn, cover, etc...)
+    req.checkBody('isbn', 'Tried to add an item to the cart with an empty/invalid isbn').notEmpty().isUUID()
+    req.checkBody('title', 'Tried to add an item to the cart with an empty title').notEmpty()
+    req.checkBody('cover', 'Tried to add an item to the cart with an empty/invalid cover url').notEmpty().isURL()
+    req.checkBody('price', 'Tried to add an item to the cart with an empty/invalid price').notEmpty().isNumeric()
+    val_errors = req.validationErrors()
+    if val_errors
+        return res.json val_errors
 
     # Add item to cart
     LibraryManager.addItemToCart req.body
@@ -42,6 +49,15 @@ router.post '/add_item', (req, res) ->
         return res.status(500).json error
 
 router.post '/remove_item', (req, res) ->
+    # Handle item (correct price, isbn, cover, etc...)
+    req.checkBody('isbn', 'Tried to remove an item from the cart with an empty/invalid isbn').notEmpty().isUUID()
+    req.checkBody('title', 'Tried to remove an item from the cart with an empty title').notEmpty()
+    req.checkBody('cover', 'Tried to remove an item from the cart with an empty/invalid cover url').notEmpty().isURL()
+    req.checkBody('price', 'Tried to remove an item from the cart with an empty/invalid price').notEmpty().isNumeric()
+    val_errors = req.validationErrors()
+    if val_errors
+        return res.json val_errors
+
     # Remove item from cart
     LibraryManager.removeItemFromCart req.body
     .then (cart) ->
