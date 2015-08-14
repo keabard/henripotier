@@ -1,4 +1,3 @@
-_               = require 'lodash'
 NodeCache       = require 'node-cache'
 Promise         = require 'bluebird'
 request         = Promise.promisify require('request')
