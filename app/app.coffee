@@ -16,7 +16,7 @@ app.use bodyParser.json()
 app.use expressValidator()
 app.use express.static "#{__dirname}/../public"
 app.use '/js', express.static "#{__dirname}/../webapp/bin"
-app.use '/js/lib', express.static "#{__dirname}/../bower_components"
+app.use '/js/lib', express.static "#{__dirname}/bower_components
 app.use '/partials', express.static "#{__dirname}/../webapp/partials"
 
 # Load controllers
